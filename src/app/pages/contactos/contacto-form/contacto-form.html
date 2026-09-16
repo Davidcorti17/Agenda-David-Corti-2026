@@ -1,0 +1,41 @@
+<div class="pagina">
+  <header class="cabecera">
+    <h1 class="titulo">{{ esEdicion() ? 'Editar contacto' : 'Nuevo contacto' }}</h1>
+  </header>
+
+  <form class="formulario" (submit)="$event.preventDefault(); guardar()">
+    <div class="campo">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" type="text" [formField]="contactoForm.nombre" />
+    </div>
+
+    <div class="campo">
+      <label for="direccion">Dirección</label>
+      <input id="direccion" type="text" [formField]="contactoForm.direccion" />
+    </div>
+
+    <div class="campo">
+      <label for="telefono">Tel. fijo</label>
+      <input id="telefono" type="tel" [formField]="contactoForm.telefono" />
+    </div>
+
+    <div class="campo">
+      <label for="celular">Celular</label>
+      <input id="celular" type="tel" [formField]="contactoForm.celular" />
+    </div>
+
+    <div class="campo">
+      <label for="email">Email</label>
+      <input id="email" type="email" [formField]="contactoForm.email" />
+    </div>
+
+    <div class="campo">
+      <label for="cumple">Cumpleaños</label>
+      <input id="cumple" type="text" placeholder="DD/MM" [formField]="contactoForm.cumple" />
+    </div>
+
+    <div class="acciones">
+      <button type="submit" class="agregar">Guardar</button>
+    </div>
+  </form>
+</div>
