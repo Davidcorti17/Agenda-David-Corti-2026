@@ -1,0 +1,44 @@
+@if (contacto(); as contacto) {
+  <div class="pagina">
+    <header class="cabecera">
+      <a routerLink="/contactos" class="volver">← Volver</a>
+    </header>
+
+    <div class="tarjeta-detalle">
+      <p class="nombre">{{ contacto.nombre || 'Nombre' }}</p>
+
+      <dl class="datos">
+        <div class="dato">
+          <dt>Dirección</dt>
+          <dd>{{ contacto.direccion || '—' }}</dd>
+        </div>
+        <div class="dato">
+          <dt>Tel. fijo</dt>
+          <dd>{{ contacto.telefono || '—' }}</dd>
+        </div>
+        <div class="dato">
+          <dt>Celular</dt>
+          <dd>{{ contacto.celular || '—' }}</dd>
+        </div>
+        <div class="dato">
+          <dt>Email</dt>
+          <dd>{{ contacto.email || '—' }}</dd>
+        </div>
+        <div class="dato">
+          <dt>Cumpleaños</dt>
+          <dd>{{ contacto.cumple || '—' }}</dd>
+        </div>
+      </dl>
+
+      <div class="acciones">
+        <a class="editar" [routerLink]="['/contactos', contacto.id, 'editar']">Editar</a>
+        <button type="button" class="eliminar" (click)="eliminar()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="pagina">
+    <p class="no-encontrado">Contacto no encontrado.</p>
+    <a routerLink="/contactos" class="volver">← Volver a contactos</a>
+  </div>
+}
