@@ -53,12 +53,15 @@
     text-transform: uppercase;
   }
 
-  input {
+  input,
+  textarea {
     padding: 0.625rem 0.75rem;
     border: 1px solid #d7deea;
     border-radius: 0.5rem;
     color: var(--navy-oscuro);
+    font-family: inherit;
     font-size: 0.95rem;
+    resize: none;
 
     &::placeholder {
       color: #9aa8bf;

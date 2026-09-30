@@ -5,23 +5,23 @@
 
   <form class="formulario" (submit)="$event.preventDefault(); guardar()">
     <div class="campo">
-      <label for="nombre">Nombre</label>
-      <input id="nombre" type="text" [formField]="contactoForm.nombre" />
+      <label for="firstName">Nombre</label>
+      <input id="firstName" type="text" [formField]="contactoForm.firstName" />
     </div>
 
     <div class="campo">
-      <label for="direccion">Dirección</label>
-      <input id="direccion" type="text" [formField]="contactoForm.direccion" />
+      <label for="lastName">Apellido</label>
+      <input id="lastName" type="text" [formField]="contactoForm.lastName" />
     </div>
 
     <div class="campo">
-      <label for="telefono">Tel. fijo</label>
-      <input id="telefono" type="tel" [formField]="contactoForm.telefono" />
+      <label for="company">Empresa</label>
+      <input id="company" type="text" [formField]="contactoForm.company" />
     </div>
 
     <div class="campo">
-      <label for="celular">Celular</label>
-      <input id="celular" type="tel" [formField]="contactoForm.celular" />
+      <label for="number">Teléfono</label>
+      <input id="number" type="tel" [formField]="contactoForm.number" />
     </div>
 
     <div class="campo">
@@ -30,8 +30,18 @@
     </div>
 
     <div class="campo">
-      <label for="cumple">Cumpleaños</label>
-      <input id="cumple" type="text" placeholder="DD/MM" [formField]="contactoForm.cumple" />
+      <label for="address">Dirección</label>
+      <input id="address" type="text" [formField]="contactoForm.address" />
+    </div>
+
+    <div class="campo">
+      <label for="image">Imagen</label>
+      <input id="image" type="url" [formField]="contactoForm.image" />
+    </div>
+
+    <div class="campo">
+      <label for="description">Descripción</label>
+      <textarea id="description" rows="3" [formField]="contactoForm.description"></textarea>
     </div>
 
     <div class="acciones">

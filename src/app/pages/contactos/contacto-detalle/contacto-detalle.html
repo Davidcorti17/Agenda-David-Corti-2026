@@ -5,28 +5,32 @@
     </header>
 
     <div class="tarjeta-detalle">
-      <h1 class="nombre">{{ contacto.nombre || 'Nombre' }}</h1>
+      @if (contacto.image) {
+        <img class="foto" [src]="contacto.image" [alt]="'Foto de ' + nombreCompleto()" />
+      }
+
+      <h1 class="nombre">{{ nombreCompleto() }}</h1>
 
       <dl class="datos">
         <div class="dato">
-          <dt>Dirección</dt>
-          <dd>{{ contacto.direccion || '—' }}</dd>
+          <dt>Empresa</dt>
+          <dd>{{ contacto.company || '—' }}</dd>
         </div>
         <div class="dato">
-          <dt>Tel. fijo</dt>
-          <dd>{{ contacto.telefono || '—' }}</dd>
-        </div>
-        <div class="dato">
-          <dt>Celular</dt>
-          <dd>{{ contacto.celular || '—' }}</dd>
+          <dt>Teléfono</dt>
+          <dd>{{ contacto.number || '—' }}</dd>
         </div>
         <div class="dato">
           <dt>Email</dt>
           <dd>{{ contacto.email || '—' }}</dd>
         </div>
         <div class="dato">
-          <dt>Cumpleaños</dt>
-          <dd>{{ contacto.cumple || '—' }}</dd>
+          <dt>Dirección</dt>
+          <dd>{{ contacto.address || '—' }}</dd>
+        </div>
+        <div class="dato descripcion">
+          <dt>Descripción</dt>
+          <dd>{{ contacto.description || '—' }}</dd>
         </div>
       </dl>
 

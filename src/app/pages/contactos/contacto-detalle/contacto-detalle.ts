@@ -16,6 +16,10 @@ export class ContactoDetalle {
 
   public readonly id = input.required<string>();
   protected readonly contacto = computed(() => this.servicio.obtener(Number(this.id())));
+  protected readonly nombreCompleto = computed(() => {
+    const contacto = this.contacto();
+    return contacto ? [contacto.firstName, contacto.lastName].filter(Boolean).join(' ') : '';
+  });
 
   protected async eliminar(): Promise<void> {
     const contacto = this.contacto();
@@ -25,7 +29,7 @@ export class ContactoDetalle {
 
     const resultado = await Swal.fire({
       icon: 'warning',
-      title: `¿Eliminar a ${contacto.nombre || 'este contacto'}?`,
+      title: `¿Eliminar a ${this.nombreCompleto() || 'este contacto'}?`,
       text: 'Esta acción no se puede deshacer.',
       showCancelButton: true,
       confirmButtonText: 'Eliminar',

@@ -1,67 +1,108 @@
 import { Service, signal } from '@angular/core';
+import { Contact, CreateOrUpdateContact } from '../interface/contact';
 
-export interface Contacto {
-  id: number;
-  nombre: string;
-  direccion: string;
-  telefono: string;
-  celular: string;
-  email: string;
-  cumple: string;
-}
+const USUARIO_ACTUAL = 1;
 
-export function contactoVacio(): Omit<Contacto, 'id'> {
-  return { nombre: '', direccion: '', telefono: '', celular: '', email: '', cumple: '' };
+export function contactoVacio() {
+  return {
+    firstName: '',
+    lastName: '',
+    address: '',
+    number: '',
+    email: '',
+    image: '',
+    company: '',
+    description: '',
+  };
 }
 
 @Service()
 export class ContactosService {
   private siguienteId = 4;
 
-  private readonly listaContactos = signal<Contacto[]>([
+  private readonly listaContactos = signal<Contact[]>([
     {
       id: 1,
-      nombre: 'David',
-      direccion: 'Av. Siempre Viva 742',
-      telefono: '11111111111111',
-      celular: '11111111111111',
+      firstName: 'David',
+      lastName: 'Corti',
+      address: 'Av. Siempre Viva 742',
+      number: '1111111111',
       email: 'david@mail.com',
-      cumple: '12/03',
+      image: null,
+      company: 'Acme',
+      description: 'Compañero de cursada',
+      userId: USUARIO_ACTUAL,
+      isFavorite: false,
     },
     {
       id: 2,
-      nombre: 'Corti',
-      direccion: 'Calle Falsa 123',
-      telefono: '11111111111111',
-      celular: '11111111111111',
-      email: 'corti@mail.com',
-      cumple: '05/09',
+      firstName: 'Nicolás',
+      lastName: 'Bologna',
+      address: 'Calle Falsa 123',
+      number: '2222222222',
+      email: 'nicolas@mail.com',
+      image: null,
+      company: 'UTN',
+      description: 'Profesor de la materia',
+      userId: USUARIO_ACTUAL,
+      isFavorite: true,
     },
     {
       id: 3,
-      nombre: 'Facundo',
-      direccion: 'Pasaje del Sol 45',
-      telefono: '11111111111111',
-      celular: '11111111111111',
+      firstName: 'Facundo',
+      lastName: 'Gómez',
+      address: 'Pasaje del Sol 45',
+      number: '3333333333',
       email: 'facundo@mail.com',
-      cumple: '28/11',
+      image: null,
+      company: null,
+      description: '',
+      userId: USUARIO_ACTUAL,
+      isFavorite: false,
     },
   ]);
 
   public readonly contactos = this.listaContactos.asReadonly();
 
-  public obtener(id: number): Contacto | undefined {
+  public obtener(id: number): Contact | undefined {
     return this.listaContactos().find((contacto) => contacto.id === id);
   }
 
-  public agregar(datos: Omit<Contacto, 'id'>): void {
-    const id = this.siguienteId++;
-    this.listaContactos.update((lista) => [...lista, { ...datos, id }]);
+  public agregar(datos: CreateOrUpdateContact): void {
+    const nuevo: Contact = {
+      id: this.siguienteId++,
+      firstName: datos.firstName,
+      lastName: datos.lastName ?? null,
+      address: datos.address ?? null,
+      number: datos.number ?? null,
+      email: datos.email ?? null,
+      image: datos.image ?? null,
+      company: datos.company ?? null,
+      description: datos.description ?? '',
+      userId: USUARIO_ACTUAL,
+      isFavorite: false,
+    };
+
+    this.listaContactos.update((lista) => [...lista, nuevo]);
   }
 
-  public actualizar(id: number, datos: Omit<Contacto, 'id'>): void {
+  public actualizar(id: number, datos: CreateOrUpdateContact): void {
     this.listaContactos.update((lista) =>
-      lista.map((contacto) => (contacto.id === id ? { ...datos, id } : contacto)),
+      lista.map((contacto) =>
+        contacto.id === id
+          ? {
+              ...contacto,
+              firstName: datos.firstName,
+              lastName: datos.lastName ?? null,
+              address: datos.address ?? null,
+              number: datos.number ?? null,
+              email: datos.email ?? null,
+              image: datos.image ?? null,
+              company: datos.company ?? null,
+              description: datos.description ?? '',
+            }
+          : contacto,
+      ),
     );
   }
 

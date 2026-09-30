@@ -8,8 +8,8 @@
     @for (contacto of servicio.contactos(); track contacto.id) {
       <li class="tarjeta">
         <a class="tarjeta-boton" [routerLink]="['/contactos', contacto.id]">
-          <p class="nombre">{{ contacto.nombre || 'Nombre' }}</p>
-          <p class="previa">{{ contacto.celular || contacto.email || 'Sin datos' }}</p>
+          <p class="nombre">{{ contacto.firstName }} {{ contacto.lastName }}</p>
+          <p class="previa">{{ contacto.number || contacto.email || contacto.company || 'Sin datos' }}</p>
         </a>
       </li>
     }

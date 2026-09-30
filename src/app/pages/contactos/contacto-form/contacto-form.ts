@@ -27,8 +27,16 @@ export class ContactoForm {
       const existente = id ? this.servicio.obtener(Number(id)) : undefined;
 
       if (existente) {
-        const { id: _id, ...datos } = existente;
-        this.datosContacto.set(datos);
+        this.datosContacto.set({
+          firstName: existente.firstName,
+          lastName: existente.lastName ?? '',
+          address: existente.address ?? '',
+          number: existente.number ?? '',
+          email: existente.email ?? '',
+          image: existente.image ?? '',
+          company: existente.company ?? '',
+          description: existente.description,
+        });
       }
     });
   }
